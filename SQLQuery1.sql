@@ -1,5 +1,6 @@
 use master
 drop database PRJ301
+delete from employee_account
 create database PRJ301
 use PRJ301
 create table category(
@@ -90,6 +91,7 @@ values ('1','1997','1','1'),
 insert into patron_account(id,fname,surname,email,status)
 values ('1','John','Cornor','jonnyC0420@gmail.com','active'),
 ('2','Joe','Cornor','joejoe2000@gmail.com','active')
-insert into employee_account(id,fname,surname,email)
-values ('1','Johnny','Marr','jonnythedon@gmail.com'),
-('2','Jenny','Carr','jcjcjc@gmail.com')
+insert into employee_account(id,fname,surname,email,password)
+values ('1','Johnny','Marr','jonnythedon@gmail.com','1234'),
+('2','Jenny','Carr','jcjcjc@gmail.com','1234')
+Select email,password from employee_account where email = 'jonnythedon@gmail.com' and password = '1234'
