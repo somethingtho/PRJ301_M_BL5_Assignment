@@ -1,5 +1,4 @@
-use master
-drop database PRJ301
+
 delete from employee_account
 create database PRJ301
 use PRJ301
@@ -94,4 +93,3 @@ values ('1','John','Cornor','jonnyC0420@gmail.com','active'),
 insert into employee_account(id,fname,surname,email,password)
 values ('1','Johnny','Marr','jonnythedon@gmail.com','1234'),
 ('2','Jenny','Carr','jcjcjc@gmail.com','1234')
-Select email,password from employee_account where email = 'jonnythedon@gmail.com' and password = '1234'

@@ -20,27 +20,27 @@ import java.util.Map;
  */
 public class EmployeeDAO {
     
-    public Employee verifyEmployee(String email) {
+    public Employee getEmployeeByEmail(String email) {
         DBContext db = new DBContext();
-        try{
+        try {
             Connection con = db.getConnection();
-            String sql = "Select * from Categories where email = " + email;
+            String sql = "Select * from employee_account where email like '%" + email + "'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            if (rs.next()){
-                Employee cat = new Employee();
-                cat.setId(rs.getInt("id"));
-                cat.setFname(rs.getString("fname"));
-                cat.setSurname(rs.getString("surname"));
-                cat.setEmail(rs.getString("email"));
-                cat.setPassword(rs.getString("password"));
+            if (rs.next()) {
+                Employee stu = new Employee();
+                stu.setId(rs.getInt("id"));
+                stu.setFname(rs.getString("fname"));
+                stu.setSurname(rs.getString("surname"));
+                stu.setEmail(rs.getString("email"));
+                stu.setPassword(rs.getString("password"));
                 rs.close();
                 st.close();
                 con.close();
-                return cat;
+                return stu;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
+            System.out.println("During search");
             System.out.println(e.getMessage());
         }
         return null;

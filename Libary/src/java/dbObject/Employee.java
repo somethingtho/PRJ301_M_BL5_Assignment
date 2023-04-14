@@ -4,6 +4,11 @@
  */
 package dbObject;
 
+import dbConnect.DBContext;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author CC
@@ -18,6 +23,11 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+    
     public Employee(int id, String fname, String surname, String email, String password) {
         this.id = id;
         this.fname = fname;
@@ -65,6 +75,33 @@ public class Employee {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+    public boolean isValidate() {
+        boolean valid=false;
+        try{
+        Connection con = (new DBContext()).getConnection();
+        if (con != null) {
+                System.out.println("Connected");
+                String sql = "Select * from employee_account";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                while (rs.next()){
+                    Employee log = new Employee();
+                    if(email.equals(rs.getString("email"))&&password.equals(rs.getString("password")))
+                        valid=true;
+                }
+                rs.close();
+                st.close();
+                con.close();
+            } else {
+                System.out.println("Not connected");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        
+        return valid;
+
+    }
    
 }
