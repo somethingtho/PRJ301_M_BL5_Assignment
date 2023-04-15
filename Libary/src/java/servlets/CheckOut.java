@@ -8,20 +8,22 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
  *
- * @author phuonglh
+ * @author CC
  */
-public class LogOut extends HttpServlet{
+public class CheckOut extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.invalidate();
-        req.getRequestDispatcher("login").forward(req, resp);
+       req.getRequestDispatcher("Checkout.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            resp.sendRedirect("ListHold");
     }
     
 }

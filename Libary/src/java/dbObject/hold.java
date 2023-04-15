@@ -4,22 +4,26 @@
  */
 package dbObject;
 
+import java.sql.Date;
+
 /**
  *
  * @author phuonglh
  */
 public class hold {
     private int Id;
-    private String s_time;
+    private Date s_time;
+    private Date e_time;
     private int book_copy_id;
     private int patron_account_id;
 
     public hold() {
     }
 
-    public hold(int Id, String s_time, int book_copy_id, int patron_account_id) {
+    public hold(int Id, Date s_time,Date e_time, int book_copy_id, int patron_account_id) {
         this.Id = Id;
         this.s_time = s_time;
+        this.e_time = e_time;
         this.book_copy_id = book_copy_id;
         this.patron_account_id = patron_account_id;
     }
@@ -32,12 +36,20 @@ public class hold {
         this.Id = Id;
     }
 
-    public String getS_time() {
+    public Date getS_time() {
         return s_time;
     }
 
-    public void setS_time(String s_time) {
+    public void setS_time(Date s_time) {
         this.s_time = s_time;
+    }
+    
+    public Date getE_time() {
+        return e_time;
+    }
+
+    public void setE_time(Date e_time) {
+        this.e_time = e_time;
     }
 
     public int getBook_copy_id() {
@@ -56,9 +68,5 @@ public class hold {
         this.patron_account_id = patron_account_id;
     }
 
-    @Override
-    public String toString() {
-        return "hold{" + "Id=" + Id + ", s_time=" + s_time + ", book_copy_id=" + book_copy_id + ", patron_account_id=" + patron_account_id + '}';
-    }
     
 }

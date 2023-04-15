@@ -5,9 +5,9 @@
 package dbList;
 
 import dbConnect.DBContext;
-import dbConnect.DBContext;
-import dbObject.Patron;
+import dbObject.book;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -19,26 +19,25 @@ import java.util.Map;
  *
  * @author phuonglh
  */
-public class PatronDAO {
-    public ArrayList<Patron> getAllCategories(){
-        ArrayList<Patron> listCategories = new ArrayList<>();
+public class bookDAO {
+    public ArrayList<book> getAllbook(){
+        ArrayList<book> listbook = new ArrayList<>();
         DBContext db = new DBContext();
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("dbList.PatronDAO.getAllCategories()");
-                String sql = "Select * from Categories";
+                System.out.println("dbList.bookDAO.getAllbook()");
+                String sql = "Select * from book_copy";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 
                 while (rs.next()){
-                    Patron cat = new Patron();
+                    book cat = new book();
                     cat.setId(rs.getInt("id"));
-                    cat.setFname(rs.getString("fname"));
-                    cat.setSurname(rs.getString("surname"));
-                    cat.setEmail(rs.getString("email"));
-                    cat.setStatus(rs.getString("status"));
-                    listCategories.add(cat);
+                    cat.setBook_id(rs.getInt("book_id"));
+                    cat.setPublisher_id(rs.getInt("publisher_id"));
+                    cat.setYear_published(rs.getInt("year_published"));
+                    listbook.add(cat);
                 }
                 rs.close();
                 st.close();
@@ -50,28 +49,27 @@ public class PatronDAO {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return listCategories;
+        return listbook;
     }
     
-    public Map<Integer, Patron> getMapCategories(){
-        Map<Integer, Patron> listCategories = new HashMap<>();
+    public Map<Integer, book> getMapbook(){
+        Map<Integer, book> listbook = new HashMap<>();
         DBContext db = new DBContext();
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("dbList.PatronDAO.getMapCategories()");
-                String sql = "Select * from Categories";
+                System.out.println("dbList.bookDAO.getMapbook()");
+                String sql = "Select * from book";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 
                 while (rs.next()){
-                    Patron cat = new Patron();
+                    book cat = new book();
                     cat.setId(rs.getInt("id"));
-                    cat.setFname(rs.getString("fname"));
-                    cat.setSurname(rs.getString("surname"));
-                    cat.setEmail(rs.getString("email"));
-                    cat.setStatus(rs.getString("status"));
-                    listCategories.put(cat.getId(), cat);
+                    cat.setBook_id(rs.getInt("book_id"));
+                    cat.setPublisher_id(rs.getInt("publisher_id"));
+                    cat.setYear_published(rs.getInt("year_published"));
+                    listbook.put(cat.getId(), cat);
                 }
                 rs.close();
                 st.close();
@@ -83,33 +81,24 @@ public class PatronDAO {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return listCategories;
+        return listbook;
     }
     
-    public Patron getPatron(int ID){
+        
+    public int getbook_id(String book_name){
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
-            String sql = "Select * from Categories where id = " + ID;
+            String sql = "select top 1 * from book_copy bc left join book b on bc.book_id=b.id where bc.is_returned=0 and b.title = '" + book_name +"'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
-                Patron cat = new Patron();
-                    cat.setId(rs.getInt("id"));
-                    cat.setFname(rs.getString("fname"));
-                    cat.setSurname(rs.getString("surname"));
-                    cat.setEmail(rs.getString("email"));
-                    cat.setStatus(rs.getString("status"));
-                rs.close();
-                st.close();
-                con.close();
-                System.out.println("dbList.PatronDAO.getPatron()");
-                return cat;
+                    return rs.getInt("id");
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return null;
+        return 0;
     }
 }

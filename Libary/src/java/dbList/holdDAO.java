@@ -7,6 +7,7 @@ package dbList;
 import dbConnect.DBContext;
 import dbObject.hold;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -25,7 +26,7 @@ public class holdDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("Connected");
+                System.out.println("dbList.holdDAO.getAllhold()");
                 String sql = "Select * from hold";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
@@ -33,7 +34,8 @@ public class holdDAO {
                 while (rs.next()){
                     hold cat = new hold();
                     cat.setId(rs.getInt("id"));
-                    cat.setS_time(rs.getString("s_time"));
+                    cat.setS_time(rs.getDate("s_time"));
+                    cat.setE_time(rs.getDate("e_time"));
                     cat.setBook_copy_id(rs.getInt("book_copy_id"));
                     cat.setPatron_account_id(rs.getInt("patron_account_id"));
                     listhold.add(cat);
@@ -57,7 +59,7 @@ public class holdDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("Connected");
+                System.out.println("dbList.holdDAO.getMaphold()");
                 String sql = "Select * from hold";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
@@ -65,7 +67,8 @@ public class holdDAO {
                 while (rs.next()){
                     hold cat = new hold();
                     cat.setId(rs.getInt("id"));
-                    cat.setS_time(rs.getString("s_time"));
+                    cat.setS_time(rs.getDate("s_time"));
+                    cat.setE_time(rs.getDate("e_time"));
                     cat.setBook_copy_id(rs.getInt("book_copy_id"));
                     cat.setPatron_account_id(rs.getInt("patron_account_id"));
                     listhold.put(cat.getId(), cat);
@@ -88,15 +91,14 @@ public class holdDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("Connected");
-                String sql = "Insert into hold(id, s_time,book_copy_id,patron_account_id) values (" + hold.getId()
-                        + ",'" + hold.getS_time()+ "'" + ",'" + hold.getBook_copy_id()+ "'"+ ",'" + hold.getPatron_account_id()+ "')";
+                System.out.println("dbList.holdDAO.inserthold()");
+                String sql = "Insert into hold(s_time,e_time,book_copy_id,patron_account_id) values ("+hold.getS_time()+"," + hold.getS_time()+",'" + hold.getBook_copy_id()+ "'"+ ",'" + hold.getPatron_account_id()+ "')";
                 Statement st = con.createStatement();
                 int rows = st.executeUpdate(sql);                
                 st.close();
                 con.close();
             } else {
-                System.out.println("Not connected");
+                System.out.println("dbList.holdDAO.inserthold()");
             }
         }
         catch (Exception e){
@@ -110,7 +112,7 @@ public class holdDAO {
             Connection con = db.getConnection();
             String sql = "Update hold set s_time = ?,book_copy_id = ?,patron_account_id = ? where id = ?";
             PreparedStatement st = con.prepareStatement(sql);
-            st.setString(1, hold.getS_time());
+            st.setDate(1, (Date) hold.getS_time());
             st.setInt(2, hold.getBook_copy_id());
             st.setInt(3, hold.getPatron_account_id());
             st.setInt(4, hold.getId());
@@ -142,13 +144,14 @@ public class holdDAO {
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
-            String sql = "Select * from hold where ID = " + ID;
+            String sql = "Select * from hold where id = " + ID;
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
                 hold cat = new hold();
-                cat.setId(rs.getInt("id"));
-                    cat.setS_time(rs.getString("s_time"));
+                    cat.setId(rs.getInt("id"));
+                    cat.setS_time(rs.getDate("s_time"));
+                    cat.setE_time(rs.getDate("e_time"));
                     cat.setBook_copy_id(rs.getInt("book_copy_id"));
                     cat.setPatron_account_id(rs.getInt("patron_account_id"));
                 rs.close();

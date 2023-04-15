@@ -5,6 +5,7 @@
 package servlets;
 
 import dbList.holdDAO;
+import dbList.bookDAO;
 import dbObject.hold;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -21,29 +24,27 @@ public class InsertHold extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       req.getRequestDispatcher("InsertCategory.jsp").forward(req, resp);
+       req.getRequestDispatcher("InsertHold.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
-            int id =Integer.parseInt(req.getParameter("id"));
-            String name=req.getParameter("name");
+            String title=req.getParameter("name");
+            int p_id=Integer.parseInt(req.getParameter("id"));
+            bookDAO bookdao = new bookDAO();
+            int b_id=bookdao.getbook_id(title);
+            
+            Date s_time = Date.valueOf(LocalDate.MAX);
+            Date e_time = Date.valueOf(LocalDate.MAX);
             holdDAO dao = new holdDAO();
-            if (dao.gethold(id) != null){
-                String error = "ID already existed.";
-                req.setAttribute("error", error);
-                req.getRequestDispatcher("InsertCategory.jsp").forward(req, resp);
-            }
-            else {
-                hold cat = new hold(id, name, id, id);
+                hold cat = new hold(0, s_time, e_time, b_id, p_id);
                 dao.inserthold(cat);
-                resp.sendRedirect("ListCategories");
-            }
+                resp.sendRedirect("ListHold");
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-            resp.sendRedirect("ListCategories");
+            resp.sendRedirect("ListHold");
         }
     }
 }

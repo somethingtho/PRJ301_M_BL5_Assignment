@@ -2,6 +2,7 @@
 delete from employee_account
 create database PRJ301
 use PRJ301
+drop table hold
 create table category(
 id int primary key,
 name varchar(255) 
@@ -54,9 +55,10 @@ is_returned bit
 );
 create table hold(
 id int primary key,
-s_time timestamp,
+s_time datetime,
+e_time datetime,
 book_copy_id int foreign key references book_copy(id),
-patron_account_id int foreign key references patron_account(id),
+patron_account_id int foreign key references patron_account(id)
 );
 create table waitlist(
 patron_id int primary key foreign key references patron_account(id),
