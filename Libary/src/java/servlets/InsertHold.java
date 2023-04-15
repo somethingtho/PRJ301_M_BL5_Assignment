@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Calendar;
 
 /**
  *
@@ -45,9 +46,9 @@ public class InsertHold extends HttpServlet{
             int p_id=Integer.parseInt(req.getParameter("id"));
             bookDAO bookdao = new bookDAO();
             int b_id=bookdao.getbook_id(title);
-            
-            Date s_time = Date.valueOf(LocalDate.MAX);
-            Date e_time = Date.valueOf(LocalDate.MAX);
+            System.out.println("servlets.InsertHold.doPost()"+b_id);
+            Date s_time = Date.valueOf(LocalDate.now());
+            Date e_time = this.addDays(s_time, 3000);
             holdDAO dao = new holdDAO();
                 hold cat = new hold(0, s_time, e_time, b_id, p_id);
                 dao.inserthold(cat);
@@ -57,5 +58,11 @@ public class InsertHold extends HttpServlet{
             System.out.println(e.getMessage());
             resp.sendRedirect("ListHold");
         }
+    }
+    public static Date addDays(Date date, int days) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, days);
+        return new Date(c.getTimeInMillis());
     }
 }

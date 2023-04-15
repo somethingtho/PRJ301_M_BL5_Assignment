@@ -8,34 +8,30 @@ import java.sql.Date;
 
 /**
  *
- * @author phuonglh
+ * @author CC
  */
-public class hold {
+public class Check {
     private int Id;
     private Date s_time;
-    private Date e_time;
     private int book_copy_id;
     private int patron_account_id;
-    private String book_name;
-    private String patron_name;
+    private int employee_account_id;
 
-    public hold() {
+    public Check() {
     }
 
-    public hold(int Id, Date s_time,Date e_time, int book_copy_id, int patron_account_id) {
+    public Check(int Id, Date s_time, int book_copy_id, int patron_account_id,int employee_account_id) {
         this.Id = Id;
         this.s_time = s_time;
-        this.e_time = e_time;
         this.book_copy_id = book_copy_id;
         this.patron_account_id = patron_account_id;
+        this.employee_account_id = employee_account_id;
     }
-
-    public hold(int Id, Date s_time, Date e_time, String book_name, String patron_name) {
+    public Check(int Id, int book_copy_id, int patron_account_id,int employee_account_id) {
         this.Id = Id;
-        this.s_time = s_time;
-        this.e_time = e_time;
-        this.book_name = book_name;
-        this.patron_name = patron_name;
+        this.book_copy_id = book_copy_id;
+        this.patron_account_id = patron_account_id;
+        this.employee_account_id = employee_account_id;
     }
     
 
@@ -54,14 +50,6 @@ public class hold {
     public void setS_time(Date s_time) {
         this.s_time = s_time;
     }
-    
-    public Date getE_time() {
-        return e_time;
-    }
-
-    public void setE_time(Date e_time) {
-        this.e_time = e_time;
-    }
 
     public int getBook_copy_id() {
         return book_copy_id;
@@ -79,21 +67,12 @@ public class hold {
         this.patron_account_id = patron_account_id;
     }
 
-    public String getBook_name() {
-        return book_name;
+    public int getEmployee_account_id() {
+        return employee_account_id;
     }
 
-    public void setBook_name(String book_name) {
-        this.book_name = book_name;
+    public void setEmployee_account_id(int employee_account_id) {
+        this.employee_account_id = employee_account_id;
     }
-
-    public String getPatron_name() {
-        return patron_name;
-    }
-
-    public void setPatron_name(String patron_name) {
-        this.patron_name = patron_name;
-    }
-
     
 }

@@ -26,7 +26,6 @@ public class bookDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("dbList.bookDAO.getAllbook()");
                 String sql = "Select * from book_copy";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
@@ -58,7 +57,6 @@ public class bookDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("dbList.bookDAO.getMapbook()");
                 String sql = "Select * from book";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
@@ -86,6 +84,7 @@ public class bookDAO {
     
         
     public int getbook_id(String book_name){
+        System.out.println("dbList.bookDAO.getbook_id()");
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
@@ -100,5 +99,22 @@ public class bookDAO {
             System.out.println(e.getMessage());
         }
         return 0;
+    }
+    public String getbook_name(int book_id){
+        System.out.println("dbList.bookDAO.getbook_name()");
+        DBContext db = new DBContext();
+        try{
+            Connection con = db.getConnection();
+            String sql = "select top 1 * from book_copy bc left join book b on bc.book_id=b.id where b.id = '" + book_id +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()){
+                    return rs.getString("title");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

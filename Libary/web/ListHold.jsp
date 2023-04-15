@@ -25,22 +25,23 @@
             <table border="1">
                 <tr>
                     <td>ID</td>
-                    <td>Start time</td>
-                    <td>End time</td>
-                    <td>Book copy ID</td>
-                    <td>Patron account ID</td>
+                    <td>Book name</td>
+                    <td>Patron name</td>
+                    <td>Register on</td>
+                    <td>Due on</td>
                 </tr>
                 <%
                     for (hold cat : list){
                     %>
                     <tr>
+                         <% System.out.println(cat.getBook_name()); %>
                         <td><%= cat.getId() %></td>
+                        <td><%= cat.getBook_name()%></td>
+                        <td><%= cat.getPatron_name()%></td>
                         <td><%= cat.getS_time()%></td>
                         <td><%= cat.getE_time()%></td>
-                        <td><%= cat.getBook_copy_id()%></td>
-                        <td><%= cat.getPatron_account_id()%></td>
                         <td>
-                            <a href="CheckOut?id=<%= cat.getId() %>">Update</a>
+                            <a href="CheckOut?id=<%= cat.getId() %>">Check out</a>
                         </td>
                     </tr>
                     <%

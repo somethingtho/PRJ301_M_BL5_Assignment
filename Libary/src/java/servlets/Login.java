@@ -38,7 +38,6 @@ public class Login extends HttpServlet{
         }
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        System.out.println(email +"," + password);
         
         EmployeeDAO userDAO = new EmployeeDAO();
         Employee user = userDAO.getEmployeeByEmail(email);

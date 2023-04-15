@@ -12,6 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%
+            Hold cat = (hold)request.getAttribute("hold");
+            if (cat==null){
+                response.sendRedirect("ListHold");
+            }
+        %>
+        
     </body>
 </html>

@@ -5,6 +5,7 @@
 package dbList;
 
 import dbConnect.DBContext;
+import dbObject.Check;
 import dbObject.hold;
 import java.sql.Connection;
 import java.sql.Date;
@@ -21,12 +22,14 @@ import java.util.Map;
  */
 public class holdDAO {
     public ArrayList<hold> getAllhold(){
+        System.out.println("dbList.holdDAO.getAllhold()");
         ArrayList<hold> listhold = new ArrayList<>();
         DBContext db = new DBContext();
+        bookDAO bookdao = new bookDAO();
+        PatronDAO patronDAO = new PatronDAO();
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("dbList.holdDAO.getAllhold()");
                 String sql = "Select * from hold";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
@@ -36,15 +39,14 @@ public class holdDAO {
                     cat.setId(rs.getInt("id"));
                     cat.setS_time(rs.getDate("s_time"));
                     cat.setE_time(rs.getDate("e_time"));
-                    cat.setBook_copy_id(rs.getInt("book_copy_id"));
-                    cat.setPatron_account_id(rs.getInt("patron_account_id"));
+                    cat.setBook_name(bookdao.getbook_name(rs.getInt("book_copy_id")));
+                    cat.setPatron_name(patronDAO.getPatron_name(rs.getInt("patron_account_id")));
                     listhold.add(cat);
                 }
                 rs.close();
                 st.close();
                 con.close();
             } else {
-                System.out.println("Not connected");
             }
         }
         catch (Exception e){
@@ -59,7 +61,6 @@ public class holdDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("dbList.holdDAO.getMaphold()");
                 String sql = "Select * from hold";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
@@ -91,14 +92,29 @@ public class holdDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                System.out.println("dbList.holdDAO.inserthold()");
-                String sql = "Insert into hold(s_time,e_time,book_copy_id,patron_account_id) values ("+hold.getS_time()+"," + hold.getS_time()+",'" + hold.getBook_copy_id()+ "'"+ ",'" + hold.getPatron_account_id()+ "')";
+                String sql = "Insert into hold(s_time,e_time,book_copy_id,patron_account_id) values (CURRENT_TIMESTAMP,CURRENT_TIMESTAMP+30,'" + hold.getBook_copy_id()+ "'"+ ",'" + hold.getPatron_account_id()+ "')";
                 Statement st = con.createStatement();
                 int rows = st.executeUpdate(sql);                
                 st.close();
                 con.close();
             } else {
-                System.out.println("dbList.holdDAO.inserthold()");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public void insertCheck(Check check){
+        DBContext db = new DBContext();
+        try {
+            Connection con = db.getConnection();
+            if (con != null) {
+                String sql = "Insert into checkout(id,s_time,book_copy_id,patron_account_id,employee_account_id) values ("+ check.getId()+"," +"CURRENT_TIMESTAMP," +check.getBook_copy_id()+ "," + check.getPatron_account_id()+"," + check.getEmployee_account_id()+ ")";
+                Statement st = con.createStatement();
+                int rows = st.executeUpdate(sql);                
+                st.close();
+                con.close();
+            } else {
             }
         }
         catch (Exception e){
@@ -157,7 +173,6 @@ public class holdDAO {
                 rs.close();
                 st.close();
                 con.close();
-                System.out.println("dbList.holdDAO.gethold()");
                 return cat;
             }
         }
@@ -166,4 +181,37 @@ public class holdDAO {
         }
         return null;
     }
+    public int getbook_id(int id){
+        DBContext db = new DBContext();
+        try{
+            Connection con = db.getConnection();
+            String sql = "select * from hold where id = '" + id +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()){
+                    return rs.getInt("book_copy_id");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
+    public int getpatron_id(int id){
+        DBContext db = new DBContext();
+        try{
+            Connection con = db.getConnection();
+            String sql = "select * from hold where id = '" + id +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()){
+                    return rs.getInt("patron_account_id");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
+    
 }

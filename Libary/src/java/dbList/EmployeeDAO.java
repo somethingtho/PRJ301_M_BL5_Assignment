@@ -45,4 +45,20 @@ public class EmployeeDAO {
         }
         return null;
     }
+    public int getEmployee_id(String email){
+        DBContext db = new DBContext();
+        try{
+            Connection con = db.getConnection();
+            String sql = "select * from employee_account where email = '" + email +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()){
+                    return rs.getInt("id");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
 }
