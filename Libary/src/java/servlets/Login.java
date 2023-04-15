@@ -20,11 +20,22 @@ public class Login extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+        HttpSession session = req.getSession();
+        if (session.getAttribute("email") != null){
+            resp.sendRedirect("ListHold");
+            return;
+        }
+        req.setAttribute("loginFailed", false);
+        req.getRequestDispatcher("Login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session.getAttribute("email") != null){
+            resp.sendRedirect("ListProducts");
+            return;
+        }
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         System.out.println(email +"," + password);
@@ -36,7 +47,8 @@ public class Login extends HttpServlet{
             req.getRequestDispatcher("Login.jsp").forward(req, resp);
         }
         else {
-            resp.sendRedirect("ListHold.jsp");
+            session.setAttribute("email", email);
+            resp.sendRedirect("ListHold");
         }
     }
 }

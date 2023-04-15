@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.sql.Date;
@@ -24,11 +25,21 @@ public class InsertHold extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session.getAttribute("email") == null){
+            resp.sendRedirect("login");
+            return;
+        }
        req.getRequestDispatcher("InsertHold.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session.getAttribute("email") == null){
+            resp.sendRedirect("login");
+            return;
+        }
         try{
             String title=req.getParameter("name");
             int p_id=Integer.parseInt(req.getParameter("id"));

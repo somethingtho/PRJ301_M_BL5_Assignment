@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,6 +22,11 @@ public class ListHold extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session.getAttribute("email") == null){
+            resp.sendRedirect("login");
+            return;
+        }
         holdDAO dao = new holdDAO();
         ArrayList<hold> list = dao.getAllhold();
         req.setAttribute("listhold", list);
@@ -29,6 +35,11 @@ public class ListHold extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session.getAttribute("email") == null){
+            resp.sendRedirect("login");
+            return;
+        }
         this.doGet(req, resp);
     }
     
