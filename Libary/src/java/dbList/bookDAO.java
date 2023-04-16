@@ -84,7 +84,6 @@ public class bookDAO {
     
         
     public int getbook_id(String book_name){
-        System.out.println("dbList.bookDAO.getbook_id()");
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
@@ -101,7 +100,6 @@ public class bookDAO {
         return 0;
     }
     public String getbook_name(int book_id){
-        System.out.println("dbList.bookDAO.getbook_name()");
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();

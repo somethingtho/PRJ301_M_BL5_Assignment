@@ -11,6 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery.js"/></script>
         <title>JSP Page</title>
     </head>
     <body>
@@ -29,6 +30,7 @@
                     <td>Patron name</td>
                     <td>Register on</td>
                     <td>Due on</td>
+                    <td>Status</td>
                 </tr>
                 <%
                     for (hold cat : list){
@@ -40,6 +42,7 @@
                         <td><%= cat.getPatron_name()%></td>
                         <td><%= cat.getS_time()%></td>
                         <td><%= cat.getE_time()%></td>
+                        <td><%= cat.getStatus()%></td>
                         <td>
                             <a href="CheckOut?id=<%= cat.getId() %>">Check out</a>
                         </td>

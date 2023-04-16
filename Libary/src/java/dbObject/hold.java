@@ -18,6 +18,7 @@ public class hold {
     private int patron_account_id;
     private String book_name;
     private String patron_name;
+    private String status;
 
     public hold() {
     }
@@ -95,5 +96,12 @@ public class hold {
         this.patron_name = patron_name;
     }
 
-    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

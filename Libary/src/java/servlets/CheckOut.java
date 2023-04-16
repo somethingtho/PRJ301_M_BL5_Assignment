@@ -32,6 +32,7 @@ public class CheckOut extends HttpServlet{
             resp.sendRedirect("login");
             return;
         }
+        
         try{
             int id=Integer.parseInt(req.getParameter("id"));
             String email = String.valueOf(session.getAttribute("email"));
@@ -42,6 +43,7 @@ public class CheckOut extends HttpServlet{
             int p_id=dao.getpatron_id(id);
                 Check cat = new Check(id, b_id, p_id,e_id);
                 dao.insertCheck(cat);
+                dao.deletehold(id);
                 resp.sendRedirect("ListHold");
         }
         catch (Exception e){

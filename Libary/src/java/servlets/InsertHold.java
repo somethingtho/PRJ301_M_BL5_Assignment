@@ -46,7 +46,6 @@ public class InsertHold extends HttpServlet{
             int p_id=Integer.parseInt(req.getParameter("id"));
             bookDAO bookdao = new bookDAO();
             int b_id=bookdao.getbook_id(title);
-            System.out.println("servlets.InsertHold.doPost()"+b_id);
             Date s_time = Date.valueOf(LocalDate.now());
             Date e_time = this.addDays(s_time, 3000);
             holdDAO dao = new holdDAO();

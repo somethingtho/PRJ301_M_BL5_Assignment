@@ -47,11 +47,10 @@ password varchar(10)
 );
 create table checkout(
 id int primary key,
-s_time timestamp,
+s_time datetime,
 book_copy_id int foreign key references book_copy(id),
 patron_account_id int foreign key references patron_account(id),
 employee_account_id int foreign key references employee_account(id),
-is_returned bit
 );
 create table hold(
 id int identity(1,1) primary key,
@@ -96,5 +95,16 @@ insert into employee_account(fname,surname,email,password)
 values ('Johnny','Marr','jonnythedon@gmail.com','1234'),
 ('Jenny','Carr','jcjcjc@gmail.com','1234')
 select * from category,book,author,book_author,publisher,book_copy
-select top 1 * from book_copy bc left join book b on bc.book_id=b.id where bc.is_returned=0 and b.title = 'Harry Potter and the Chamber of Secrets'
-select top 1 * from book_copy bc left join book b on bc.book_id=b.id where b.id=1
+insert into checkout(id,s_time,book_copy_id,patron_account_id,employee_account_id)
+values ('2','2023-06-16 12:52:05.777',1,'1',1),
+('3','2023-04-16 12:52:05.777',1,'1',1)
+SELECT CAST(
+             CASE
+                  WHEN e_time > '2023-06-16 12:52:05.777'
+                     THEN ''
+                  ELSE 'Overdue'
+             END AS varchar(10)) as Status, *
+FROM hold
+
+drop table book_copy
+select * from checkout

@@ -22,7 +22,6 @@ import java.util.Map;
  */
 public class holdDAO {
     public ArrayList<hold> getAllhold(){
-        System.out.println("dbList.holdDAO.getAllhold()");
         ArrayList<hold> listhold = new ArrayList<>();
         DBContext db = new DBContext();
         bookDAO bookdao = new bookDAO();
@@ -30,7 +29,13 @@ public class holdDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                String sql = "Select * from hold";
+                String sql = "SELECT CAST(\n" +
+"             CASE\n" +
+"                  WHEN hold.e_time > CURRENT_TIMESTAMP\n" +
+"                     THEN 'Good'\n" +
+"                  ELSE 'Overdue'\n" +
+"             END AS varchar(10)) as Status, *\n" +
+"FROM hold";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 
@@ -41,6 +46,7 @@ public class holdDAO {
                     cat.setE_time(rs.getDate("e_time"));
                     cat.setBook_name(bookdao.getbook_name(rs.getInt("book_copy_id")));
                     cat.setPatron_name(patronDAO.getPatron_name(rs.getInt("patron_account_id")));
+                    cat.setStatus(rs.getString("Status"));
                     listhold.add(cat);
                 }
                 rs.close();
