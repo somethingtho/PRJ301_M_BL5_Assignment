@@ -24,6 +24,7 @@ public class holdDAO {
     public ArrayList<hold> getAllhold(){
         ArrayList<hold> listhold = new ArrayList<>();
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.getAllhold()");
         bookDAO bookdao = new bookDAO();
         PatronDAO patronDAO = new PatronDAO();
         try {
@@ -64,6 +65,7 @@ public class holdDAO {
     public Map<Integer, hold> getMaphold(){
         Map<Integer, hold> listhold = new HashMap<>();
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.getMaphold()");
         try {
             Connection con = db.getConnection();
             if (con != null) {
@@ -95,6 +97,7 @@ public class holdDAO {
     
     public void inserthold(hold hold){
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.inserthold()");
         try {
             Connection con = db.getConnection();
             if (con != null) {
@@ -112,12 +115,15 @@ public class holdDAO {
     }
     public void insertCheck(Check check){
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.insertCheck()");
         try {
             Connection con = db.getConnection();
             if (con != null) {
                 String sql = "Insert into checkout(id,s_time,book_copy_id,patron_account_id,employee_account_id) values ("+ check.getId()+"," +"CURRENT_TIMESTAMP," +check.getBook_copy_id()+ "," + check.getPatron_account_id()+"," + check.getEmployee_account_id()+ ")";
                 Statement st = con.createStatement();
-                int rows = st.executeUpdate(sql);                
+                int rows = st.executeUpdate(sql);
+                bookDAO dao = new bookDAO();
+                dao.updatebook(check.getBook_copy_id(), 0);
                 st.close();
                 con.close();
             } else {
@@ -130,6 +136,7 @@ public class holdDAO {
     
     public void updatehold(hold hold){
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.updatehold()");
         try{
             Connection con = db.getConnection();
             String sql = "Update hold set s_time = ?,book_copy_id = ?,patron_account_id = ? where id = ?";
@@ -149,6 +156,7 @@ public class holdDAO {
     
     public void deletehold(int ID){
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.deletehold()");
         try{
             Connection con = db.getConnection();
             String sql = "Delete from hold where id = " + ID;
@@ -164,6 +172,7 @@ public class holdDAO {
     
     public hold gethold(int ID){
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.gethold()");
         try{
             Connection con = db.getConnection();
             String sql = "Select * from hold where id = " + ID;
@@ -189,6 +198,7 @@ public class holdDAO {
     }
     public int getbook_id(int id){
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.getbook_id()");
         try{
             Connection con = db.getConnection();
             String sql = "select * from hold where id = '" + id +"'";
@@ -205,6 +215,7 @@ public class holdDAO {
     }
     public int getpatron_id(int id){
         DBContext db = new DBContext();
+        System.out.println("dbList.holdDAO.getpatron_id()");
         try{
             Connection con = db.getConnection();
             String sql = "select * from hold where id = '" + id +"'";

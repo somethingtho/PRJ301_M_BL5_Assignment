@@ -40,6 +40,7 @@ public class CheckOut extends HttpServlet{
             int e_id=employeeDAO.getEmployee_id(email);
             holdDAO dao = new holdDAO();
             int b_id=dao.getbook_id(id);
+            System.out.println(b_id);
             int p_id=dao.getpatron_id(id);
                 Check cat = new Check(id, b_id, p_id,e_id);
                 dao.insertCheck(cat);

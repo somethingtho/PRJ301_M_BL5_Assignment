@@ -36,7 +36,6 @@
                     for (hold cat : list){
                     %>
                     <tr>
-                         <% System.out.println(cat.getBook_name()); %>
                         <td><%= cat.getId() %></td>
                         <td><%= cat.getBook_name()%></td>
                         <td><%= cat.getPatron_name()%></td>

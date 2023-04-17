@@ -36,6 +36,7 @@ public class InsertHold extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("servlets.InsertHold.doPost()");
         HttpSession session = req.getSession();
         if (session.getAttribute("email") == null){
             resp.sendRedirect("login");
@@ -46,12 +47,20 @@ public class InsertHold extends HttpServlet{
             int p_id=Integer.parseInt(req.getParameter("id"));
             bookDAO bookdao = new bookDAO();
             int b_id=bookdao.getbook_id(title);
-            Date s_time = Date.valueOf(LocalDate.now());
-            Date e_time = this.addDays(s_time, 3000);
-            holdDAO dao = new holdDAO();
+            System.out.println(b_id);
+            if("1".equals(bookdao.getstatus(b_id))){
+                resp.sendRedirect("Waiting");
+            }
+            else{
+                System.out.println(b_id);
+                Date s_time = Date.valueOf(LocalDate.now());
+                Date e_time = this.addDays(s_time, 3000);
+                holdDAO dao = new holdDAO();
                 hold cat = new hold(0, s_time, e_time, b_id, p_id);
                 dao.inserthold(cat);
+                bookdao.updatebook(b_id, 1);
                 resp.sendRedirect("ListHold");
+            }
         }
         catch (Exception e){
             System.out.println(e.getMessage());

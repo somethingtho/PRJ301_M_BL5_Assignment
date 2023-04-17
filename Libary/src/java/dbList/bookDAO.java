@@ -21,6 +21,7 @@ import java.util.Map;
  */
 public class bookDAO {
     public ArrayList<book> getAllbook(){
+        System.out.println("dbList.bookDAO.getAllbook()");
         ArrayList<book> listbook = new ArrayList<>();
         DBContext db = new DBContext();
         try {
@@ -52,6 +53,7 @@ public class bookDAO {
     }
     
     public Map<Integer, book> getMapbook(){
+        System.out.println("dbList.bookDAO.getMapbook()");
         Map<Integer, book> listbook = new HashMap<>();
         DBContext db = new DBContext();
         try {
@@ -84,13 +86,15 @@ public class bookDAO {
     
         
     public int getbook_id(String book_name){
+        System.out.println("dbList.bookDAO.getbook_id()");
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
-            String sql = "select top 1 * from book_copy bc left join book b on bc.book_id=b.id where bc.is_returned=0 and b.title = '" + book_name +"'";
+            String sql = "select top 1 * from book_copy bc left join book b on bc.book_id=b.id where b.title = '" + book_name +"'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
+               
                     return rs.getInt("id");
             }
         }
@@ -99,7 +103,25 @@ public class bookDAO {
         }
         return 0;
     }
+    public void updatebook(int id,int status){
+        System.out.println("dbList.bookDAO.updatebook()");
+        DBContext db = new DBContext();
+        try{
+            Connection con = db.getConnection();
+            System.out.println(id);
+            String sql="Update book_copy set is_returned=? where id="+id;
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, status);
+            int row = st.executeUpdate();
+            st.close();
+            con.close();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
     public String getbook_name(int book_id){
+        System.out.println("dbList.bookDAO.getbook_name()");
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
@@ -108,6 +130,23 @@ public class bookDAO {
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
                     return rs.getString("title");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public String getstatus(int book_id){
+        System.out.println("dbList.bookDAO.getstatus()");
+        DBContext db = new DBContext();
+        try{
+            Connection con = db.getConnection();
+            String sql = "select * from book_copy where id = '" + book_id +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()){
+                    return rs.getString("is_returned");
             }
         }
         catch (Exception e){
