@@ -16,6 +16,10 @@
         <servlet-name>CheckOut</servlet-name>
         <servlet-class>servlets.CheckOut</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Waiting</servlet-name>
+        <servlet-class>servlets.WaitList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CheckOut</servlet-name>
         <url-pattern>/CheckOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Waiting</servlet-name>
+        <url-pattern>/Waiting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

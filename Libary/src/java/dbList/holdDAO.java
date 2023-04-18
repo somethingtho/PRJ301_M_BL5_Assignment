@@ -6,6 +6,7 @@ package dbList;
 
 import dbConnect.DBContext;
 import dbObject.Check;
+import dbObject.wait;
 import dbObject.hold;
 import java.sql.Connection;
 import java.sql.Date;
@@ -133,21 +134,19 @@ public class holdDAO {
             System.out.println(e.getMessage());
         }
     }
-    
-    public void updatehold(hold hold){
+    public void insertWait(wait wait){
         DBContext db = new DBContext();
-        System.out.println("dbList.holdDAO.updatehold()");
-        try{
+        System.out.println("dbList.holdDAO.insertWait()");
+        try {
             Connection con = db.getConnection();
-            String sql = "Update hold set s_time = ?,book_copy_id = ?,patron_account_id = ? where id = ?";
-            PreparedStatement st = con.prepareStatement(sql);
-            st.setDate(1, (Date) hold.getS_time());
-            st.setInt(2, hold.getBook_copy_id());
-            st.setInt(3, hold.getPatron_account_id());
-            st.setInt(4, hold.getId());
-            int row = st.executeUpdate();
-            st.close();
-            con.close();
+            if (con != null) {
+                String sql = "Insert into waitlist(book_copy_id,patron_id) values (" + wait.getB_id()+ "," + wait.getP_id()+")";
+                Statement st = con.createStatement();
+                int rows = st.executeUpdate(sql);                
+                st.close();
+                con.close();
+            } else {
+            }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
