@@ -17,7 +17,7 @@ import java.io.IOException;
  *
  * @author CC
  */
-public class WaitList extends HttpServlet{
+public class InsertWait extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -52,10 +52,7 @@ public class InsertHold extends HttpServlet{
             resp.sendRedirect("Waiting?p_id="+p_id+"&b_id="+b_id);
             }
             else{
-                System.out.println(b_id);
-                Date s_time = Date.valueOf(LocalDate.now());
-                Date e_time = this.addDays(s_time, 3000);
-                hold cat = new hold(0, s_time, e_time, b_id, p_id);
+                hold cat = new hold(b_id, p_id);
                 dao.inserthold(cat);
                 bookdao.updatebook(b_id, 1);
                 resp.sendRedirect("ListHold");
@@ -66,7 +63,7 @@ public class InsertHold extends HttpServlet{
             resp.sendRedirect("ListHold");
         }
     }
-    public static Date addDays(Date date, int days) {
+    public Date addDays(Date date, int days) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         c.add(Calendar.DATE, days);

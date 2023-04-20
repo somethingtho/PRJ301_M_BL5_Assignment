@@ -31,6 +31,12 @@ public class hold {
         this.patron_account_id = patron_account_id;
     }
 
+    public hold(int book_copy_id, int patron_account_id) {
+        this.book_copy_id = book_copy_id;
+        this.patron_account_id = patron_account_id;
+    }
+    
+
     public hold(int Id, Date s_time, Date e_time, String book_name, String patron_name) {
         this.Id = Id;
         this.s_time = s_time;

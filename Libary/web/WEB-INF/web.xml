@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>Waiting</servlet-name>
-        <servlet-class>servlets.WaitList</servlet-class>
+        <servlet-class>servlets.InsertWait</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
