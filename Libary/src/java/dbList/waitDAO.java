@@ -25,14 +25,14 @@ public class waitDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                String sql = "SELECT * FROM wait";
+                String sql = "SELECT * FROM waitlist";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
                 
                 while (rs.next()){
                     wait cat = new wait();
                     cat.setB_id(rs.getInt("book_copy_id"));
-                    cat.setP_id(rs.getInt("patron_account_id"));
+                    cat.setP_id(rs.getInt("patron_id"));
                     listwait.add(cat);
                 }
                 rs.close();

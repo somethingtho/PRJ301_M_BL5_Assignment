@@ -4,13 +4,18 @@
  */
 package dbObject;
 
+import dbList.PatronDAO;
+import dbList.bookDAO;
+
 /**
  *
  * @author CC
  */
 public class wait {
     int b_id,p_id;
-
+    String b_name,p_name;
+    bookDAO b_dao = new bookDAO();
+    PatronDAO p_dao =new PatronDAO();
     public wait() {
     }
 
@@ -33,6 +38,18 @@ public class wait {
 
     public void setP_id(int p_id) {
         this.p_id = p_id;
+    }
+
+    public String getB_name() {
+        b_name=b_dao.getbook_name(b_id);
+        System.out.println(b_name);
+        return b_name;
+    }
+
+    public String getP_name() {
+        p_name=p_dao.getPatron_name(p_id);
+        System.out.println(p_name);
+        return p_name;
     }
     
 }

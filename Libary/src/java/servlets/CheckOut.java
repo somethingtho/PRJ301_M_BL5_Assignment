@@ -46,11 +46,11 @@ public class CheckOut extends HttpServlet{
                 Check cat = new Check(id, b_id, p_id,e_id);
                 dao.insertCheck(cat);
                 dao.deletehold(id);
-                //resp.sendRedirect("ListHold");
+                resp.sendRedirect("ListHold");
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-            //resp.sendRedirect("ListHold");
+            resp.sendRedirect("ListHold");
         }
 }
        

@@ -12,7 +12,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="${pageContext.request.contextPath}/jQuery.js"/></script>
-        <title>JSP Page</title>
     </head>
     <body>
         <%
@@ -24,7 +23,6 @@
             %>
             <table border="1">
                 <tr>
-                    <td>ID</td>
                     <td>Book name</td>
                     <td>Patron name</td>
                 </tr>
@@ -32,10 +30,8 @@
                     for (wait cat : list){
                     %>
                     <tr>
-                        <td><%= cat.getId() %></td>
-                        <td><%= cat.getBook_name()%></td>
-                        <td><%= cat.getPatron_name()%></td>
-                        <td>
+                        <td><%= cat.getB_name()%></td>
+                        <td><%= cat.getP_name()%></td>
                         </td>
                     </tr>
                     <%

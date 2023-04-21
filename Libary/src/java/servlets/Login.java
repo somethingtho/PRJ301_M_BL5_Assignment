@@ -33,7 +33,7 @@ public class Login extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         if (session.getAttribute("email") != null){
-            resp.sendRedirect("ListProducts");
+            resp.sendRedirect("ListHold");
             return;
         }
         String email = req.getParameter("email");

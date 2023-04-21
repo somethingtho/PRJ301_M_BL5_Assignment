@@ -43,7 +43,7 @@
                         <td><%= cat.getE_time()%></td>
                         <td><%= cat.getStatus()%></td>
                         <td>
-                            <a href="CheckOut?id=<%= cat.getId() %>">Check out</a>
+                            <a href="CheckOut?id=<%= cat.getId() %>" onclick="return confirm('Are you sure you want to delete this item?');">Check out</a>
                         </td>
                     </tr>
                     <%
@@ -55,5 +55,6 @@
             }
         %>
         <a href="InsertHold.jsp"><button>Add hold</button></a>
+        <a href="ListWait"><button>Waiting</button></a>
     </body>
 </html>
