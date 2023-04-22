@@ -21,6 +21,7 @@ public class InsertWait extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("servlets.InsertWait.doGet()");
         HttpSession session = req.getSession();
         if (session.getAttribute("email") == null){
             resp.sendRedirect("login");
@@ -28,16 +29,16 @@ public class InsertWait extends HttpServlet{
         }
         
         try{
-            int b_id=Integer.parseInt(req.getParameter("b_id"));
+            String b_name=req.getParameter("b_name");
             int p_id=Integer.parseInt(req.getParameter("p_id"));
             holdDAO dao = new holdDAO();
-                wait cat = new wait(b_id,p_id);
+                wait cat = new wait(b_name,p_id);
                 dao.insertWait(cat);
-                //resp.sendRedirect("ListHold");
+                resp.sendRedirect("ListHold");
         }
         catch (Exception e){
             System.out.println(e.getMessage());
-            //resp.sendRedirect("ListHold");
+            resp.sendRedirect("ListHold");
         }
 }
        

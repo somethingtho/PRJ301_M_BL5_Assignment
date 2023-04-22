@@ -4,8 +4,11 @@
  */
 package servlets;
 
+import dbList.bookDAO;
 import dbList.holdDAO;
+import dbList.waitDAO;
 import dbObject.hold;
+import dbObject.wait;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,14 +25,27 @@ public class ListHold extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("servlets.ListHold.doGet()");
         HttpSession session = req.getSession();
         if (session.getAttribute("email") == null){
             resp.sendRedirect("login");
             return;
         }
         holdDAO dao = new holdDAO();
-        ArrayList<hold> list = dao.getAllhold();
-        req.setAttribute("listhold", list);
+        waitDAO w_dao = new waitDAO();
+        bookDAO b_dao =new bookDAO();
+        ArrayList<wait> list2 = w_dao.getAllWait();
+        
+        for (wait cat : list2){
+            if(b_dao.getstatus(cat.getB_name())){
+            hold hold = new hold(cat.getB_id(), cat.getP_id());
+            dao.inserthold(hold);
+            w_dao.deletewait(cat.getId());
+            }
+        }
+        
+        ArrayList<hold> list1 = dao.getAllhold();
+        req.setAttribute("listhold", list1);
         req.getRequestDispatcher("ListHold.jsp").forward(req, resp);
     }
 

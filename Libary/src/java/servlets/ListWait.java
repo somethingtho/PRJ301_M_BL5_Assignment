@@ -4,7 +4,9 @@
  */
 package servlets;
 
+import dbList.holdDAO;
 import dbList.waitDAO;
+import dbObject.hold;
 import dbObject.wait;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -22,6 +24,7 @@ public class ListWait extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("servlets.ListWait.doGet()");
         HttpSession session = req.getSession();
         if (session.getAttribute("email") == null){
             resp.sendRedirect("login");

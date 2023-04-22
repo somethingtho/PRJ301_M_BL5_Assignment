@@ -12,16 +12,24 @@ import dbList.bookDAO;
  * @author CC
  */
 public class wait {
-    int b_id,p_id;
+    int b_id,p_id,id;
     String b_name,p_name;
     bookDAO b_dao = new bookDAO();
     PatronDAO p_dao =new PatronDAO();
     public wait() {
     }
 
-    public wait(int b_id, int p_id) {
-        this.b_id = b_id;
+    public wait(String b_name, int p_id) {
+        this.b_name = b_name;
         this.p_id = p_id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getB_id() {
@@ -41,8 +49,6 @@ public class wait {
     }
 
     public String getB_name() {
-        b_name=b_dao.getbook_name(b_id);
-        System.out.println(b_name);
         return b_name;
     }
 

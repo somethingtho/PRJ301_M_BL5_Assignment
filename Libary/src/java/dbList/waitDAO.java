@@ -31,7 +31,8 @@ public class waitDAO {
                 
                 while (rs.next()){
                     wait cat = new wait();
-                    cat.setB_id(rs.getInt("book_copy_id"));
+                    cat.setId(rs.getInt("id"));
+                    cat.setB_id(rs.getInt("book_name"));
                     cat.setP_id(rs.getInt("patron_id"));
                     listwait.add(cat);
                 }
@@ -45,5 +46,20 @@ public class waitDAO {
             System.out.println(e.getMessage());
         }
         return listwait;
+    }
+    public void deletewait(int ID){
+        DBContext db = new DBContext();
+        System.out.println("dbList.waitDao.deletewait()");
+        try{
+            Connection con = db.getConnection();
+            String sql = "Delete from waitlist where id = " + ID;
+            Statement st = con.createStatement();
+            int row = st.executeUpdate(sql);
+            st.close();
+            con.close();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }

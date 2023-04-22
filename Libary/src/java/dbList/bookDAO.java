@@ -90,11 +90,11 @@ public class bookDAO {
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
-            String sql = "select top 1 * from book_copy bc left join book b on bc.book_id=b.id where b.title = '" + book_name +"'";
+            String sql = "select top 1 * from book_copy bc left join book b on bc.book_id=b.id where is_returned=0 and b.title = '" + book_name +"'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
-               
+                System.out.println(rs.getInt("id"));
                     return rs.getInt("id");
             }
         }
@@ -108,7 +108,6 @@ public class bookDAO {
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
-            System.out.println(id);
             String sql="Update book_copy set is_returned=? where id="+id;
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, status);
@@ -129,6 +128,7 @@ public class bookDAO {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
+                System.out.println(rs.getString("title"));
                     return rs.getString("title");
             }
         }
@@ -137,21 +137,23 @@ public class bookDAO {
         }
         return null;
     }
-    public String getstatus(int book_id){
+    public boolean getstatus(String book_name){
         System.out.println("dbList.bookDAO.getstatus()");
         DBContext db = new DBContext();
         try{
             Connection con = db.getConnection();
-            String sql = "select * from book_copy where id = '" + book_id +"'";
+            String sql = "select * from book_copy bc left join book b on bc.book_id=b.id where b.title = '" + book_name +"'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
-                    return rs.getString("is_returned");
+                if(rs.){
+                    return true;
+                }
             }
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-        return null;
+        return false;
     }
 }
