@@ -19,19 +19,32 @@
             out.println("The email or password is not correct.");
             }
         %>
-        
-        <form action="login" method="post">
-            <div class="container">
-                <label for="uname"><b>Email:</b></label></br>
-                <input type="text" placeholder="Enter Username" name="email" required></br>
-
-                <label for="psw"><b>Password</b></label></br>
-                <input type="password" placeholder="Enter Password" name="password" required></br>
-
-                <button type="submit">Login</button></br>
-                <label>
-                </label>
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+                <div class="wrap-login100">
+                    <form class="login100-form validate-form" action="login" method="post">
+                        <span class="login100-form-logo">
+                            <img src="images/OIP.jpg">
+                        </span>
+                        <span class="login100-form-title p-b-34 p-t-27">
+                            Log in
+                        </span>
+                        <div class="wrap-input100 validate-input" data-validate="Enter email">
+                            <input class="input100" type="text" name="email" placeholder="Email">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <input class="input100" type="password" name="password" placeholder="Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </body>
 </html>
