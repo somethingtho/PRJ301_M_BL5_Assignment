@@ -4,9 +4,11 @@
  */
 package servlets;
 
+import dbList.SendEmail;
 import dbList.bookDAO;
 import dbList.holdDAO;
 import dbList.waitDAO;
+import dbObject.Notification;
 import dbObject.hold;
 import dbObject.wait;
 import jakarta.servlet.ServletException;
@@ -34,14 +36,14 @@ public class ListHold extends HttpServlet{
         holdDAO dao = new holdDAO();
         waitDAO w_dao = new waitDAO();
         bookDAO b_dao =new bookDAO();
+        SendEmail sm = new SendEmail();
         ArrayList<wait> list2 = w_dao.getAllWait();
-        
         for (wait cat : list2){
-            System.out.println("for");
             if(b_dao.getstatus(cat.getB_name())){
-                System.out.println("if");
             hold hold = new hold(b_dao.getbook_id(cat.getB_name()), cat.getP_id());
             dao.inserthold(hold);
+            Notification notif = new Notification("On hold", cat.getP_id());
+            sm.send(notif);
             w_dao.deletewait(cat.getId());
             }
         }

@@ -127,4 +127,20 @@ public class PatronDAO {
         }
         return null;
     }
+    public String getPatron_email(int patron_id){
+        DBContext db = new DBContext();
+        try{
+            Connection con = db.getConnection();
+            String sql = "select * from patron_account where id = '" + patron_id +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()){
+                return rs.getString("email");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 }

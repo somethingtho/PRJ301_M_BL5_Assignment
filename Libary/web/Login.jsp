@@ -9,6 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Login page</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css" />
     </head>
     <body>
         <%
@@ -17,10 +19,19 @@
             out.println("The email or password is not correct.");
             }
         %>
+        
         <form action="login" method="post">
-            Email: <input type="text" name="email"/><br/>
-            Password: <input type="text" name="password"/><br/>
-            <input type="submit" value="login"/>
+            <div class="container">
+                <label for="uname"><b>Email:</b></label></br>
+                <input type="text" placeholder="Enter Username" name="email" required></br>
+
+                <label for="psw"><b>Password</b></label></br>
+                <input type="password" placeholder="Enter Password" name="password" required></br>
+
+                <button type="submit">Login</button></br>
+                <label>
+                </label>
+            </div>
         </form>
     </body>
 </html>
