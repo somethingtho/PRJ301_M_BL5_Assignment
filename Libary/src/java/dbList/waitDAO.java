@@ -20,8 +20,6 @@ public class waitDAO {
         ArrayList<wait> listwait = new ArrayList<>();
         DBContext db = new DBContext();
         System.out.println("dbList.waitDAO.getAllwait()");
-        bookDAO bookdao = new bookDAO();
-        PatronDAO patronDAO = new PatronDAO();
         try {
             Connection con = db.getConnection();
             if (con != null) {
@@ -32,7 +30,7 @@ public class waitDAO {
                 while (rs.next()){
                     wait cat = new wait();
                     cat.setId(rs.getInt("id"));
-                    cat.setB_id(rs.getInt("book_name"));
+                    cat.setB_name(rs.getString("book_name"));
                     cat.setP_id(rs.getInt("patron_id"));
                     listwait.add(cat);
                 }

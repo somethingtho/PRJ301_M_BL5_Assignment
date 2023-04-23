@@ -48,13 +48,16 @@ public class wait {
         this.p_id = p_id;
     }
 
+    public void setB_name(String b_name) {
+        this.b_name = b_name;
+    }
+
     public String getB_name() {
         return b_name;
     }
 
     public String getP_name() {
         p_name=p_dao.getPatron_name(p_id);
-        System.out.println(p_name);
         return p_name;
     }
     

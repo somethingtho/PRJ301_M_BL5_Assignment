@@ -99,7 +99,7 @@ public class holdDAO {
     public void inserthold(hold hold){
         DBContext db = new DBContext();
         bookDAO bookdao = new bookDAO();
-        System.out.println("dbList.holdDAO.inserthold()");
+        System.out.println("dbList.holdDAO.inserthold()"+hold.getBook_copy_id());
         try {
             Connection con = db.getConnection();
             if (con != null) {
@@ -142,7 +142,7 @@ public class holdDAO {
         try {
             Connection con = db.getConnection();
             if (con != null) {
-                String sql = "Insert into waitlist(book_name,patron_id) values (" + wait.getB_name()+ "," + wait.getP_id()+")";
+                String sql = "Insert into waitlist(book_name,patron_id) values (" +"'"+ wait.getB_name()+ "'," + wait.getP_id()+")";
                 Statement st = con.createStatement();
                 int rows = st.executeUpdate(sql);                
                 st.close();

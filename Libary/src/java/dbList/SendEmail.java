@@ -23,10 +23,10 @@ public class SendEmail {
 
 public class SendMail {
 
-    public void mail() {
+    public void mail(String p_email,String mess,String type) {
 
-        final String username = "your_user_name@gmail.com";
-        final String password = "yourpassword";
+        final String username = "fictionallibary@gmail.com";
+        final String password = "Aa@123456";
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");
@@ -44,12 +44,11 @@ public class SendMail {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("your_user_name@gmail.com"));
+            message.setFrom(new InternetAddress("fictionallibary@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
-                InternetAddress.parse("to_email_address@example.com"));
-            message.setSubject("Testing Subject");
-            message.setText("Dear Mail Crawler,"
-                + "\n\n No spam to my email, please!");
+                InternetAddress.parse(p_email));
+            message.setSubject(type);
+            message.setText(mess);
 
             Transport.send(message);
 

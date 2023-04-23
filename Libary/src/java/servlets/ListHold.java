@@ -37,8 +37,10 @@ public class ListHold extends HttpServlet{
         ArrayList<wait> list2 = w_dao.getAllWait();
         
         for (wait cat : list2){
+            System.out.println("for");
             if(b_dao.getstatus(cat.getB_name())){
-            hold hold = new hold(cat.getB_id(), cat.getP_id());
+                System.out.println("if");
+            hold hold = new hold(b_dao.getbook_id(cat.getB_name()), cat.getP_id());
             dao.inserthold(hold);
             w_dao.deletewait(cat.getId());
             }

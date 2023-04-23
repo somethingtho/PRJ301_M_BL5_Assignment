@@ -90,7 +90,8 @@ values ('1997','1','1',0),
 ('1999','3','1',0),
 ('1999','3','1',0)
 insert into patron_account(fname,surname,email,status)
-values ('John','Cornor','jonnyC0420@gmail.com','active'),
+values ('Dung','Hoang','dungthhe170357@fpt.edu.vn','active'),
+('John','Cornor','jonnyC0420@gmail.com','active'),
 ('Joe','Cornor','joejoe2000@gmail.com','active')
 insert into employee_account(fname,surname,email,password)
 values ('Johnny','Marr','jonnythedon@gmail.com','1234'),

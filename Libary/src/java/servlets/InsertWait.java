@@ -29,8 +29,8 @@ public class InsertWait extends HttpServlet{
         }
         
         try{
-            String b_name=req.getParameter("b_name");
-            int p_id=Integer.parseInt(req.getParameter("p_id"));
+            String b_name=session.getAttribute("b_name").toString();
+            int p_id=Integer.parseInt(session.getAttribute("p_id").toString());
             holdDAO dao = new holdDAO();
                 wait cat = new wait(b_name,p_id);
                 dao.insertWait(cat);

@@ -47,16 +47,17 @@ public class InsertHold extends HttpServlet{
             System.out.println("servlets.InsertHold.doPost()"+title);
             int p_id=Integer.parseInt(req.getParameter("id"));
             bookDAO bookdao = new bookDAO();
-            int b_id=bookdao.getbook_id(title);
-            System.out.println(b_id);
             holdDAO dao= new holdDAO();
             if(bookdao.getstatus(title)){
+                int b_id=bookdao.getbook_id(title);
                 hold cat = new hold(b_id, p_id);
                 dao.inserthold(cat);
                 resp.sendRedirect("ListHold");
             }
             else{
-                resp.sendRedirect("Waiting?p_id="+p_id+"&b_name="+title);
+                session.setAttribute("p_id", p_id);
+                session.setAttribute("b_name", title);
+                resp.sendRedirect("Waiting");
             }
         }
         catch (Exception e){
