@@ -24,6 +24,14 @@
         <servlet-name>ListWait</servlet-name>
         <servlet-class>servlets.ListWait</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteHold</servlet-name>
+        <servlet-class>servlets.DeleteHold</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogOut</servlet-name>
+        <servlet-class>servlets.LogOut</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>ListWait</servlet-name>
         <url-pattern>/ListWait</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteHold</servlet-name>
+        <url-pattern>/Delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOut</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

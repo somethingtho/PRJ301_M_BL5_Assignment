@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css" />
+        <link rel="stylesheet" type="text/css" href="main.css" />
         <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
         <link rel="stylesheet" type="text/css" href="util.css">
         <title>Welcome Page</title>
@@ -20,18 +20,22 @@
         <%
             ArrayList<hold> list = (ArrayList<hold>)request.getAttribute("listhold");
             if (list==null || list.size()==0){
-                out.println("No hold in the list.");
+        %>
+        <script type="text/javascript">
+            alert("No hold in the list.");
+        </script>
+        <%
             }
             else {
         %>
         <div id="navbar">
-            
-            <a href="#home">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
+            <img src="images/OIP.jpg">
+            <a href="Logout">Log out</a>
+            <a href="ListWait">Waiting list</a>
+            <a href="ListHold">Home</a>
         </div>
         <div class="limiter">
-            <div class="container-table100">
+            <div class="container-table100" style="background-image: url('images/bg-01.jpg');">
                 <div class="wrap-table100">
                     <div class="table100">
                         <table>
@@ -43,6 +47,7 @@
                                     <th>Register on</th>
                                     <th>Due on</th>
                                     <th>Status</th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -58,7 +63,8 @@
                                     <td><%= cat.getE_time()%></td>
                                     <td><%= cat.getStatus()%></td>
                                     <td>
-                                        <a href="CheckOut?id=<%= cat.getId() %>" onclick="return confirm('Are you sure you want to check out this item?');">Check out</a>
+                                        <a href="CheckOut?id=<%= cat.getId() %>" onclick="return confirm('Are you sure you want to check out this item?');"><button class="login100-form-btn">Check Out</button></a>
+                                        <a href="Delete?id=<%= cat.getId() %>" onclick="return confirm('Are you sure you want to delete this item?');"><button class="login100-form-btn">Delete</button></a>
                                     </td>
                                 </tr>
                                 <%
@@ -68,18 +74,15 @@
                         </table>
                         <br/>
                         <%
-                        }
+                                }
                         %>
-                        <!--                        <div class="container-login100-form-btn">
-                                                    <a href="InsertHold.jsp"><button class="login100-form-btn">Add hold</button></a>
-                                                </div>
-                                                <div class="container-login100-form-btn">
-                                                    <a href="ListWait"><button class="login100-form-btn">Waiting</button></a>
-                                                </div>-->
+                        <div class="container-login100-form-btn">
+                            <a href="InsertHold"><button class="login100-form-btn">Add Hold</button></a>
+                        </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>            
     </body>
 </html>

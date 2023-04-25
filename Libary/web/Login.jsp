@@ -18,8 +18,12 @@
         <%
             Boolean loginFailed = (Boolean)request.getAttribute("loginFailed");
             if (loginFailed != null && loginFailed){
-            out.println("The email or password is not correct.");
-            }
+        %>
+        <script type="text/javascript">
+            alert("The email or password is not correct.");
+        </script>
+        <%
+    }
         %>
         <div class="limiter">
             <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
