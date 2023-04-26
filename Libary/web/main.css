@@ -68,7 +68,7 @@ iframe{
   overflow: hidden;
   background-color: #333;
 }
-img{
+.smalllogo{
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -183,6 +183,10 @@ table{
 }
 table *{
     position:relative
+}
+.cover{
+    width: 70px;
+    height: 90px;
 }
 table td,table th{
     padding-left:8px

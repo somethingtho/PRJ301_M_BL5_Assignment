@@ -36,7 +36,7 @@
                 <div class="wrap-login100">
                     <form class="login100-form validate-form" action="InsertHold" method="post">
                         <span class="login100-form-logo">
-                            <img src="images/OIP.jpg">
+                            <img class="logog" src="images/OIP.jpg">
                         </span>
                         <span class="login100-form-title p-b-34 p-t-27">
                             Insert Hold

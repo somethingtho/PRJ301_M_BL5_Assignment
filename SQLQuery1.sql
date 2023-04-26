@@ -10,6 +10,7 @@ create table book(
 id int identity(1,1) primary key,
 title varchar(255),
 category_id int foreign key references category(id),
+pic_link varchar(255)
 );
 create table author(
 id int identity(1,1) primary key,
@@ -72,10 +73,10 @@ patron_account_id int foreign key references patron_account(id),
 );
 insert into category(name)
 values ('Fantasy')
-insert into book(title, category_id)
-values ('Harry Potter and the Philosopher’s Stone','1'),
-('Harry Potter and the Chamber of Secrets','1'),
-('Harry Potter and the Prisoner of Azkaban','1')
+insert into book(title, category_id, pic_link)
+values ('Harry Potter and the Philosopher’s Stone','1','images/R.jpg'),
+('Harry Potter and the Chamber of Secrets','1','images/C.jpg'),
+('Harry Potter and the Prisoner of Azkaban','1','images/A.jpg')
 insert into author(name)
 values ('J. K. Rowling')
 insert into book_author(book_id, author_id)
@@ -111,7 +112,7 @@ Update book_copy set is_returned=0
 Update book_copy set is_returned=1
 select top 1 bc.id from book_copy bc left join book b on bc.book_id=b.id where bc.is_returned=0 and b.title = 'Harry Potter and the Philosopher’s Stone'
 drop table waitlist
-select * from book_copy
+select * from book
 select * from hold
 insert into hold(s_time,book_copy_id,patron_account_id)
 values ('2023-06-16 12:52:05.777',1,'1')

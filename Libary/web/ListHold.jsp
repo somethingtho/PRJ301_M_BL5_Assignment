@@ -29,7 +29,7 @@
             else {
         %>
         <div id="navbar">
-            <img src="images/OIP.jpg">
+            <img class="smalllogo" src="images/OIP.jpg">
             <a href="Logout">Log out</a>
             <a href="ListWait">Waiting list</a>
             <a href="ListHold">Home</a>
@@ -43,6 +43,7 @@
                                 <tr class="table100-head">
                                     <th>ID</th>
                                     <th>Book name</th>
+                                    <th></th>
                                     <th>Patron name</th>
                                     <th>Register on</th>
                                     <th>Due on</th>
@@ -58,6 +59,10 @@
                                 <tr>
                                     <td><%= cat.getId() %></td>
                                     <td><%= cat.getBook_name()%></td>
+                                    <%
+                                   System.out.println(cat.getPiclink());
+                                %>
+                                    <td><img class="cover" src="<%= cat.getPiclink()%>"></td>
                                     <td><%= cat.getPatron_name()%></td>
                                     <td><%= cat.getS_time()%></td>
                                     <td><%= cat.getE_time()%></td>

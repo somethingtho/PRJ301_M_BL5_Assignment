@@ -10,7 +10,7 @@ package dbObject;
  */
 public class book {
     int id ,year_published ,book_id  ,publisher_id,category_id ;
-    String title;
+    String title,piclink;
 
     public book() {
     }
@@ -19,6 +19,19 @@ public class book {
         this.book_id = book_id;
         this.category_id = category_id;
         this.title = title;
+    }
+
+    public book(int id, String piclink) {
+        this.id = id;
+        this.piclink = piclink;
+    }
+    
+    public String getPiclink() {
+        return piclink;
+    }
+
+    public void setPiclink(String piclink) {
+        this.piclink = piclink;
     }
 
     public int getId() {

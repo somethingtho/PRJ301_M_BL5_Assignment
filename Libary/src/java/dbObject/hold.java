@@ -4,6 +4,7 @@
  */
 package dbObject;
 
+import dbList.bookDAO;
 import java.sql.Date;
 
 /**
@@ -18,7 +19,7 @@ public class hold {
     private int patron_account_id;
     private String book_name;
     private String patron_name;
-    private String status;
+    private String status,piclink;
 
     public hold() {
     }
@@ -43,6 +44,16 @@ public class hold {
         this.e_time = e_time;
         this.book_name = book_name;
         this.patron_name = patron_name;
+    }
+
+    public String getPiclink() {
+        bookDAO b_dao = new bookDAO();
+        piclink=b_dao.getpiclink(book_name);
+        return piclink;
+    }
+
+    public void setPiclink(String piclink) {
+        this.piclink = piclink;
     }
     
 

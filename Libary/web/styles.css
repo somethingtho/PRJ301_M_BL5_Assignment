@@ -179,7 +179,7 @@ iframe {
   overflow: hidden;
   background-color: #333;
 }
-img{
+.smalllogo{
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -261,7 +261,11 @@ img{
     background-color: #fff;
     margin: 0 auto
 }
-
+.logog{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
 .login100-form-title {
     font-family: Poppins-Medium;
     font-size: 30px;

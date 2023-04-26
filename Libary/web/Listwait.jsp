@@ -18,7 +18,7 @@
     </head>
     <body>
         <div id="navbar">
-            <img src="images/OIP.jpg">
+            <img class="smalllogo" src="images/OIP.jpg">
             <a href="Logout">Log out</a>
             <a href="ListWait">Waiting list</a>
             <a href="ListHold">Home</a>

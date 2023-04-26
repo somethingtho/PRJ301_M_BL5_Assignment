@@ -94,7 +94,6 @@ public class bookDAO {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()){
-                System.out.println(rs.getInt("id"));
                     return rs.getInt("id");
             }
         }
@@ -153,5 +152,22 @@ public class bookDAO {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+    public String getpiclink(String book_name){
+        System.out.println("dbList.bookDAO.getbook_id()");
+        DBContext db = new DBContext();
+        try{
+            Connection con = db.getConnection();
+            String sql = "select top 1 * from book_copy bc left join book b on bc.book_id=b.id where b.title = '" + book_name +"'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()){
+                    return rs.getString("pic_link");
+            }
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
