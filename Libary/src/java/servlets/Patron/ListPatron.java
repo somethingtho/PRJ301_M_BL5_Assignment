@@ -2,12 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servlets;
+package servlets.Patron;
 
-import dbList.holdDAO;
-import dbList.waitDAO;
-import dbObject.hold;
-import dbObject.wait;
+import dbList.PatronDAO;
+import dbObject.Patron;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,20 +18,27 @@ import java.util.ArrayList;
  *
  * @author CC
  */
-public class ListWait extends HttpServlet{
+public class ListPatron extends HttpServlet{
 
+    /**
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("servlets.ListWait.doGet()");
+        System.out.println("servlets.ListPatron.doGet()");
         HttpSession session = req.getSession();
         if (session.getAttribute("email") == null){
             resp.sendRedirect("login");
             return;
         }
-        waitDAO dao = new waitDAO();
-        ArrayList<wait> list = dao.getAllWait();
-        req.setAttribute("listwait", list);
-        req.getRequestDispatcher("Listwait.jsp").forward(req, resp);
+        PatronDAO dao = new PatronDAO();
+        ArrayList<Patron> list = dao.getAllPatron();
+        req.setAttribute("listPatron", list);
+        req.getRequestDispatcher("ListPatron.jsp").forward(req, resp);
     }
 
     @Override
@@ -45,5 +50,4 @@ public class ListWait extends HttpServlet{
         }
         this.doGet(req, resp);
     }
-    
 }

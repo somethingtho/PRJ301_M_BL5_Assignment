@@ -4,6 +4,8 @@
  */
 package servlets;
 
+import dbList.SendEmail;
+import dbObject.Notification;
 import dbList.holdDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -16,11 +18,11 @@ import java.io.IOException;
  *
  * @author CC
  */
-public class DeleteHold extends HttpServlet{
+public class Overdue extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("servlets.CheckOut.doGet()");
+        System.out.println("servlets.InsertWait.doGet()");
         HttpSession session = req.getSession();
         if (session.getAttribute("email") == null){
             resp.sendRedirect("login");
@@ -28,16 +30,17 @@ public class DeleteHold extends HttpServlet{
         }
         
         try{
+            holdDAO h_dao = new holdDAO();
             int id=Integer.parseInt(req.getParameter("id"));
-            holdDAO dao = new holdDAO();
-                dao.deletehold(id);
-                resp.sendRedirect("ListHold");
+                SendEmail sm = new SendEmail();
+                Notification notif = new Notification("Overdue",h_dao.getpatron_id(id));
+                sm.send(notif);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
             resp.sendRedirect("ListHold");
         }
-    }
+}
        
 
     @Override
@@ -49,4 +52,5 @@ public class DeleteHold extends HttpServlet{
         }
         req.getRequestDispatcher("ListHold").forward(req, resp);
     }
+    
 }

@@ -97,29 +97,5 @@ values ('Dung','Hoang','dungthhe170357@fpt.edu.vn','active'),
 insert into employee_account(fname,surname,email,password)
 values ('Johnny','Marr','jonnythedon@gmail.com','1234'),
 ('Jenny','Carr','jcjcjc@gmail.com','1234')
-select * from category,book,author,book_author,publisher,book_copy
-insert into checkout(id,s_time,book_copy_id,patron_account_id,employee_account_id)
-values ('2','2023-06-16 12:52:05.777',1,'1',1),
-('3','2023-04-16 12:52:05.777',1,'1',1)
-SELECT CAST(
-             CASE
-                  WHEN e_time > '2023-06-16 12:52:05.777'
-                     THEN ''
-                  ELSE 'Overdue'
-             END AS varchar(10)) as Status, *
-FROM hold
-Update book_copy set is_returned=0
-Update book_copy set is_returned=1
-select top 1 bc.id from book_copy bc left join book b on bc.book_id=b.id where bc.is_returned=0 and b.title = 'Harry Potter and the Philosopher’s Stone'
-drop table waitlist
-select * from book
-select * from hold
-insert into hold(s_time,book_copy_id,patron_account_id)
-values ('2023-06-16 12:52:05.777',1,'1')
-insert into waitlist(book_copy_id,patron_id)
-values (1,'1')
-select * from book_copy bc left join book b on bc.book_id=b.id where b.title = 'Harry Potter and the Philosopher’s Stone'
-select * from checkout
-select * from waitlist
-Delete from hold where id = 1
-
+select * from patron_account
+Update patron_account set fname='Jose', surname='Nai', email='josenaine@gmail.com',status='active' where id=4

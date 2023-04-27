@@ -13,7 +13,7 @@ import dbList.bookDAO;
  */
 public class wait {
     int b_id,p_id,id;
-    String b_name,p_name;
+    String b_name,p_name,piclink;
     bookDAO b_dao = new bookDAO();
     PatronDAO p_dao =new PatronDAO();
     public wait() {
@@ -60,5 +60,9 @@ public class wait {
         p_name=p_dao.getPatron_name(p_id);
         return p_name;
     }
-    
+    public String getPiclink() {
+        bookDAO b_dao = new bookDAO();
+        piclink=b_dao.getpiclink(b_name);
+        return piclink;
+    }
 }

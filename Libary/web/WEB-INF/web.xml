@@ -6,31 +6,51 @@
     </servlet>
     <servlet>
         <servlet-name>InsertHold</servlet-name>
-        <servlet-class>servlets.InsertHold</servlet-class>
+        <servlet-class>servlets.Hold.InsertHold</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListHold</servlet-name>
-        <servlet-class>servlets.ListHold</servlet-class>
+        <servlet-class>servlets.Hold.ListHold</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckOut</servlet-name>
-        <servlet-class>servlets.CheckOut</servlet-class>
+        <servlet-class>servlets.Hold.CheckOut</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Waiting</servlet-name>
-        <servlet-class>servlets.InsertWait</servlet-class>
+        <servlet-class>servlets.Wait.InsertWait</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListWait</servlet-name>
-        <servlet-class>servlets.ListWait</servlet-class>
+        <servlet-class>servlets.Hold.ListWait</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteHold</servlet-name>
-        <servlet-class>servlets.DeleteHold</servlet-class>
+        <servlet-class>servlets.Hold.DeleteHold</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogOut</servlet-name>
         <servlet-class>servlets.LogOut</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Overdue</servlet-name>
+        <servlet-class>servlets.Overdue</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertPatron</servlet-name>
+        <servlet-class>servlets.Patron.InsertPatron</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListPatron</servlet-name>
+        <servlet-class>servlets.Patron.ListPatron</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePatron</servlet-name>
+        <servlet-class>servlets.Patron.DeletePatron</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePatron</servlet-name>
+        <servlet-class>servlets.Patron.UpdatePatron</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -63,6 +83,26 @@
     <servlet-mapping>
         <servlet-name>LogOut</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Overdue</servlet-name>
+        <url-pattern>/Overdue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertPatron</servlet-name>
+        <url-pattern>/InsertPatron</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListPatron</servlet-name>
+        <url-pattern>/ListPatron</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePatron</servlet-name>
+        <url-pattern>/DeletePatron</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePatron</servlet-name>
+        <url-pattern>/UpdatePatron</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

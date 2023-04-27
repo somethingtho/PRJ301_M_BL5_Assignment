@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servlets;
+package servlets.Hold;
 
 import dbList.SendEmail;
 import dbList.bookDAO;
@@ -42,8 +42,8 @@ public class ListHold extends HttpServlet{
             if(b_dao.getstatus(cat.getB_name())){
             hold hold = new hold(b_dao.getbook_id(cat.getB_name()), cat.getP_id());
             dao.inserthold(hold);
-            Notification notif = new Notification("On hold", cat.getP_id());
-            sm.send(notif);
+//            Notification notif = new Notification("On hold", cat.getP_id());
+//            sm.send(notif);
             w_dao.deletewait(cat.getId());
             }
         }

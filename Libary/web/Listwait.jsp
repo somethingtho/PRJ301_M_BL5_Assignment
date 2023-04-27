@@ -14,12 +14,14 @@
         <link rel="stylesheet" type="text/css" href="main.css" />
         <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
         <link rel="stylesheet" type="text/css" href="util.css">
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.7.1.js"></script>   
         <title>Waiting List</title>
     </head>
     <body>
         <div id="navbar">
             <img class="smalllogo" src="images/OIP.jpg">
             <a href="Logout">Log out</a>
+            <a href="ListPatron">Patron</a>
             <a href="ListWait">Waiting list</a>
             <a href="ListHold">Home</a>
         </div>
@@ -39,11 +41,12 @@
             <div class="container-table100" style="background-image: url('images/bg-01.jpg');">
                 <div class="wrap-table100">
                     <div class="table100">
-                        <table>
+                        <table id="table">
                             <thead>
                                 <tr class="table100-head">
                                     <th>Book name</th>
                                     <th>Patron name</th>
+                                    <th><input class="searchbar" type="text" id="search" placeholder="Type to search"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +55,7 @@
                                 %>
                                 <tr>
                                     <td><%= cat.getB_name()%></td>
+                                    <td><img class="cover" src="<%= cat.getPiclink()%>"></td>
                                     <td><%= cat.getP_name()%></td>
                                 </tr>
                                 <%
@@ -68,6 +72,24 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">//<![CDATA[
+
+
+var $rows = $('#table tbody tr');
+$('#search').keyup(function() {
+    
+var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+reg = RegExp(val, 'i'),
+text;
+    
+$rows.show().filter(function() {
+text = $(this).text().replace(/\s+/g, ' ');
+return !reg.test(text);
+}).hide();
+});
+
+
+//]]></script>
     </body>
 </html>
 

@@ -35,22 +35,22 @@
         <div class="limiter">
             <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
                 <div class="wrap-login100">
-                    <form class="login100-form validate-form" action="InsertHold" method="post">
+                    <form class="login100-form validate-form" action="InsertPatron" method="post">
                         <span class="login100-form-logo">
                             <img class="logog" src="images/OIP.jpg">
                         </span>
                         <span class="login100-form-title p-b-34 p-t-27">
-                            Insert Hold
+                            Insert Patron
                         </span>
-                        <div class="wrap-input100 validate-input" data-validate="Enter Book name:">
-                            <input class="input100" type="text" name="name" placeholder="Book name">
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter Patron first name:">
+                            <input class="input100" type="text" name="fname" placeholder="Patron first name">
                         </div>
-                        <div class="wrap-input100 validate-input" data-validate="Enter Patron id:">
-                            <input class="input100" type="text" name="id" placeholder="Patron id">
+                        <div class="wrap-input100 validate-input" data-validate="Enter Patron last name:">
+                            <input class="input100" type="text" name="lname" placeholder="Patron last name">
                         </div>
-                        <div class="emt">
-                        </div>
-                        <div class="emt">
+                        <div class="wrap-input100 validate-input" data-validate="Enter Patron email:">
+                            <input class="input100" type="text" name="email" placeholder="Patron email">
                         </div>
                         <div class="container-login100-form-btn">
                             <button class="login100-form-btn">
